@@ -1,6 +1,6 @@
 package com.javacore.input;
 
-public class BuildingInput {
+public class BuildingSearchInput {
 	private String name;
 	private Integer floorArea;
 	private String street;

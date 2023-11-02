@@ -1,8 +1,10 @@
 package com.javacore.service;
 
-import com.javacore.dto.BuildingDTO;
-import com.javacore.service.emyeuanh.BuildingEmYeuAnh;
+import java.util.List;
+
+import com.javacore.input.BuildingSearchInput;
+import com.javacore.output.BuildingOutput;
 
 public interface BuildingService {
-	public BuildingEmYeuAnh[] findBuilding(BuildingDTO buildingDTO);
+	public List<BuildingOutput> findBuilding(BuildingSearchInput buildingDTO);
 }

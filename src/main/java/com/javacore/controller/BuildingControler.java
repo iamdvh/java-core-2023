@@ -1,13 +1,16 @@
 package com.javacore.controller;
 
-import com.javacore.dto.BuildingDTO;
+import java.util.List;
+
+import com.javacore.input.BuildingSearchInput;
+import com.javacore.output.BuildingOutput;
 import com.javacore.service.BuildingService;
 import com.javacore.service.imp.BuildingServiceImp;
 
 public class BuildingControler {
 	private BuildingService buildingService = new BuildingServiceImp();
-	public BuildingDTO[] findBuilding(BuildingDTO buildingSearch) {
-		buildingService.findBuilding(buildingSearch);
-		return null;
+	public List<BuildingOutput> findBuilding(BuildingSearchInput buildingSearch) {
+	    List<BuildingOutput> results =	buildingService.findBuilding(buildingSearch);
+		return results;
 	}
 }
