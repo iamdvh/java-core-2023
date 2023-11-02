@@ -22,9 +22,10 @@ public class BuildingListView {
 		BuildingControler buildingControler = new BuildingControler();
 		List<BuildingOutput> buildings = buildingControler.findBuilding(buildingSearch);
 		for (BuildingOutput buildingOutput : buildings) {
-			System.out.println("FloorArea" + buildingOutput.getFloorArea());
-			System.out.println("Name" + buildingOutput.getName());
-			System.out.println("Address" + buildingOutput.getAddress());
+			System.out.println("Name: " + buildingOutput.getName());
+			System.out.println("FloorArea: " + buildingOutput.getFloorArea());
+			System.out.println("Address: " + buildingOutput.getAddress());
+			System.out.println("-----------------------------------------------");
 		}
 	}
 }
