@@ -1,5 +1,7 @@
 package com.javacore.dao;
 
-public interface BuildingDAO {
+import com.javacore.dao.anhyeuem.BuildingAnhyeuEm;
 
+public interface BuildingDAO {
+	BuildingAnhyeuEm[] findBuilding(Integer floorArea, String name, String street, String district, String ward);
 }
