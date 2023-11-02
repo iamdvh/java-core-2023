@@ -12,9 +12,6 @@ public class JDBC {
 	public static final String PASSWORD="mavryk";
 	public static final String QUERY  = "select * from buildings";
 	public static void main(String[] args) {
-		Connection con = null;
-		Statement stmt= null;
-		ResultSet rs= null;
 		//search
 		StringBuilder query = new StringBuilder("select * from buildings where 1=1");
 		String name = null;
@@ -39,11 +36,10 @@ public class JDBC {
 		query.append(" and ward like'%"+ward+"%'");
 	}
 
-		try {			
+		try(Connection con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
+			Statement stmt = con.createStatement();
+			ResultSet rs= stmt.executeQuery(query.toString())) {			
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-			stmt = con.createStatement();
-			rs = stmt.executeQuery(query.toString());
 			while(rs.next()) {
 				System.out.println("Name: " + rs.getString("name"));
 				System.out.println("FloorArea: " + rs.getString("floorArea"));
@@ -55,29 +51,7 @@ public class JDBC {
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
-		} finally {
-			if(con != null) {	
-				try {					
-					con.close();
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			if(stmt != null) {	
-				try {					
-					stmt.close();
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-			if(rs != null) {
-				try {					
-					rs.close();
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
-			}
-		}	
+		} 
 	}
 }
 
