@@ -11,9 +11,8 @@ public class Test {
 		System.out.println("Màu da cá chuồn: " +caChuon.getColorSkin());
 		System.out.println("Màu mắt cá chuồn mẹ: " + caChuon.getColorEyeP());
 		System.out.println("Màu da cá chuồn mẹ: " +caChuon.getColorSkinP());
-		
 		LopCa caBayMau = new CaBayMau();
 		caBayMau.boi();
-		caBayMau.boi("Ca Bay Mau Bơi Kiểu Của Cá 7 Màu");
+		caBayMau.boi("Cá bảy màu bơi theo kiểu overloading");
 	}
 }

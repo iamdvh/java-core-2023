@@ -23,7 +23,12 @@ public class CaBayMau extends LopCa {
 		public void setColorSkin(String colorSkin) {
 			this.colorSkin = colorSkin;
 		}
-		
+		public void boi() {
+			System.out.println("Cá bảy màu bơi theo kiểu overriding");
+		}
+		public void boi(String style) {
+			System.out.println(style);
+		}
 	}
 
 

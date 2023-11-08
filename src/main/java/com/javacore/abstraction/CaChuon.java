@@ -28,5 +28,8 @@ public class CaChuon extends LopCa{
 	public void setColorSkin(String colorSkin) {
 		this.colorSkin = colorSkin;
 	}
+	public void boi() {
+		System.out.println("Ca Chuồn Chuồn Bơi");
+	}
 	
 }
