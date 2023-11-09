@@ -12,7 +12,7 @@ public class BuildingListView {
 		String name = null;
 		String street = null;
 		String district = null;
-		String ward = null;
+		String ward = "Quận số 1";
 		BuildingSearchInput buildingSearch = new BuildingSearchInput();
 		buildingSearch.setName(name);
 		buildingSearch.setStreet(street);
