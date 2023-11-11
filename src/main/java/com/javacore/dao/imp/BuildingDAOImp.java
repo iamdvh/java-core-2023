@@ -9,15 +9,15 @@ import java.util.List;
 
 import com.javacore.constant.SystemConstant;
 import com.javacore.dao.BuildingDAO;
-import com.javacore.dao.anhyeuem.BuildingAnhyeuEm;
+import com.javacore.dao.entity.BuildingEntity;
 import com.javacore.utils.ConnectionUtils;
 import com.javacore.utils.StringUtils;
 
 public class BuildingDAOImp implements BuildingDAO{
 
 	@Override
-	public List<BuildingAnhyeuEm> findBuilding(Integer floorArea, String name, String street, String district, String ward) {
-		List<BuildingAnhyeuEm> results = new ArrayList<BuildingAnhyeuEm>();
+	public List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward, String type) {
+		List<BuildingEntity> results = new ArrayList<BuildingEntity>();
 		// TODO Auto-generated method stub
 		Connection con = null;
 		Statement stmt= null;
@@ -41,16 +41,20 @@ public class BuildingDAOImp implements BuildingDAO{
 		if(!StringUtils.isNullOrEmpty(ward)) {
 			query.append(" and ward like'%"+ward+"%'");
 		}
+		if(!StringUtils.isNullOrEmpty(type)) {
+			query.append(" and type like'%"+type+"%'");
+		}
 		con = ConnectionUtils.getConnection();
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(query.toString());
 		while(rs.next()) {
-			BuildingAnhyeuEm buildingAnhYeuEm = new BuildingAnhyeuEm();
+			BuildingEntity buildingAnhYeuEm = new BuildingEntity();
 			buildingAnhYeuEm.setName(rs.getString("name"));
 			buildingAnhYeuEm.setStreet(rs.getString("street"));
 			buildingAnhYeuEm.setDistrict(rs.getString("district"));
 			buildingAnhYeuEm.setWard(rs.getString("ward"));
 			buildingAnhYeuEm.setFloorArea(rs.getInt("floorArea"));
+			buildingAnhYeuEm.setType(rs.getString("type"));
 			results.add(buildingAnhYeuEm);
 		}
 		return results;

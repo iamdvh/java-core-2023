@@ -2,8 +2,8 @@ package com.javacore.dao;
 
 import java.util.List;
 
-import com.javacore.dao.anhyeuem.BuildingAnhyeuEm;
+import com.javacore.dao.entity.BuildingEntity;
 
 public interface BuildingDAO {
-	List<BuildingAnhyeuEm> findBuilding(Integer floorArea, String name, String street, String district, String ward);
+	List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward, String type);
 }

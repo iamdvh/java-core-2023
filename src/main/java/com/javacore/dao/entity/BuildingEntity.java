@@ -1,12 +1,13 @@
-package com.javacore.dao.anhyeuem;
+package com.javacore.dao.entity;
 
-public class BuildingAnhyeuEm {
+public class BuildingEntity {
 	private Long id;
 	private String name;
 	private Integer floorArea;
 	private String street;
 	private String district;
 	private String ward;
+	private String type;
 	public Long getId() {
 		return id;
 	}
@@ -42,6 +43,12 @@ public class BuildingAnhyeuEm {
 	}
 	public void setWard(String ward) {
 		this.ward = ward;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 	
 }

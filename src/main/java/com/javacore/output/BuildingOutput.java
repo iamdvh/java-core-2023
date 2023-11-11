@@ -4,6 +4,7 @@ public class BuildingOutput {
 	private String name;
 	private String address;
 	private Integer floorArea;
+	private String type;
 	public String getName() {
 		return name;
 	}
@@ -22,4 +23,11 @@ public class BuildingOutput {
 	public void setFloorArea(Integer floorArea) {
 		this.floorArea = floorArea;
 	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 }
