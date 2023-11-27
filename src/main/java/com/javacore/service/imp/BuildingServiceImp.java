@@ -33,10 +33,10 @@ public class BuildingServiceImp implements BuildingService{
 		return buildingOutputs;
 	}
 	private static String getName(String value) {
-		List<String> convert = new ArrayList<String>();
-		for (String item : value.split(", ")) {
-			convert.add(BuildingTypeUtils.allTypes(item));
+		List<String> newType = new ArrayList<String>();
+		for (String oldType : value.split(", ")) {
+			newType.add(BuildingTypeUtils.allTypes(oldType));
 		}
-		return String.join(", ", convert);
+		return String.join(", ", newType);
 	}
-}
+}      
