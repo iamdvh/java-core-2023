@@ -5,5 +5,5 @@ import java.util.List;
 import com.javacore.dao.entity.BuildingEntity;
 
 public interface BuildingDAO {
-	List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward, String type);
+	List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward);
 }

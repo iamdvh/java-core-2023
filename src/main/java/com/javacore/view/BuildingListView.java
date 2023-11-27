@@ -36,15 +36,14 @@ public class BuildingListView {
 				String district = sc.nextLine();
 				System.out.println("Search Ward: ");
 				String ward = sc.nextLine();
-				System.out.println("Search Type: ");
-				String type = sc.nextLine();
+//				System.out.println("Search Type: ");
+//				String type = null;
 				BuildingSearchInput buildingSearch = new BuildingSearchInput();
 				buildingSearch.setName(name);
 				buildingSearch.setFloorArea(floorArea);;
 				buildingSearch.setStreet(street);
 				buildingSearch.setDistrict(district);
 				buildingSearch.setWard(ward);
-				buildingSearch.setType(type);
 				BuildingController buildingController = new BuildingController();
 				List<BuildingOutput> buildings = buildingController.findBuilding(buildingSearch);
 				 for (BuildingOutput item : buildings) {

@@ -6,7 +6,6 @@ public class BuildingSearchInput {
 	private String street;
 	private String district;
 	private String ward;
-	private String type;
 	public String getName() {
 		return name;
 	}
@@ -36,12 +35,6 @@ public class BuildingSearchInput {
 	}
 	public void setWard(String ward) {
 		this.ward = ward;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
 	}
 	
 	

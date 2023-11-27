@@ -16,7 +16,7 @@ import com.javacore.utils.StringUtils;
 public class BuildingDAOImp implements BuildingDAO{
 
 	@Override
-	public List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward, String type) {
+	public List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward) {
 		List<BuildingEntity> results = new ArrayList<BuildingEntity>();
 		// TODO Auto-generated method stub
 		Connection con = null;
@@ -41,9 +41,9 @@ public class BuildingDAOImp implements BuildingDAO{
 		if(!StringUtils.isNullOrEmpty(ward)) {
 			query.append(" and ward like'%"+ward+"%'");
 		}
-		if(!StringUtils.isNullOrEmpty(type)) {
-			query.append(" and type like'%"+type+"%'");
-		}
+//		if(StringUtils.isNullOrEmpty(type)) {
+//			query.append(" and type like'%"+type+"%'");
+//		}
 		con = ConnectionUtils.getConnection();
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(query.toString());
