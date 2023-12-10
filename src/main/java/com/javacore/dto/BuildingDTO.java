@@ -6,6 +6,14 @@ public class BuildingDTO extends BaseDTO {
 	private String street;
 	private String district;
 	private String ward;
+	private String rentArea;
+
+	public String getRentArea() {
+		return rentArea;
+	}
+	public void setRentArea(String rentArea) {
+		this.rentArea = rentArea;
+	}
 	public String getName() {
 		return name;
 	}

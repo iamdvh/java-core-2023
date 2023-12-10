@@ -3,7 +3,7 @@ package com.javacore.dto;
 public class BaseDTO {
 	private Long id;
 
-	private Long getId() {
+	public Long getId() {
 		return id;
 	}
 

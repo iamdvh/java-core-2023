@@ -6,4 +6,6 @@ import com.javacore.dao.entity.BuildingEntity;
 
 public interface BuildingDAO {
 	List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward);
+
+	void insert(BuildingEntity buildingEntity, String rentArea);
 }

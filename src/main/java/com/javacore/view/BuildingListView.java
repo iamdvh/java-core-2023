@@ -36,8 +36,6 @@ public class BuildingListView {
 				String district = sc.nextLine();
 				System.out.println("Search Ward: ");
 				String ward = sc.nextLine();
-//				System.out.println("Search Type: ");
-//				String type = null;
 				BuildingSearchInput buildingSearch = new BuildingSearchInput();
 				buildingSearch.setName(name);
 				buildingSearch.setFloorArea(floorArea);;

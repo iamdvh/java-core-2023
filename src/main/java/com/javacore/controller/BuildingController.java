@@ -2,6 +2,7 @@ package com.javacore.controller;
 
 import java.util.List;
 
+import com.javacore.dto.BuildingDTO;
 import com.javacore.input.BuildingSearchInput;
 import com.javacore.output.BuildingOutput;
 import com.javacore.service.BuildingService;
@@ -13,4 +14,7 @@ public class BuildingController {
 	    List<BuildingOutput> results =	buildingService.findBuilding(buildingSearch);
 		return results;
 	}
+	public void save(BuildingDTO buildingDto) {
+		buildingService.insert(buildingDto);
+	};
 }
