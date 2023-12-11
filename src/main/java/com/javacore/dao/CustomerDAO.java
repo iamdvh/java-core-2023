@@ -5,7 +5,7 @@ import java.util.List;
 import com.javacore.dao.entity.CustomerEntity;
 import com.javacore.input.CustomerSearchInput;
 
-public interface CustomerDAO {
+public interface CustomerDAO extends BasicRespository<CustomerEntity>{
 	public List<CustomerEntity> findAll();
-	public void insert(CustomerEntity newCustomer);
+//	public void insert(CustomerEntity newCustomer);
 }
