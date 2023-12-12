@@ -13,7 +13,7 @@ import com.javacore.dao.entity.BuildingEntity;
 import com.javacore.utils.ConnectionUtils;
 import com.javacore.utils.StringUtils;
 
-public class BuildingDAOImp implements BuildingDAO{
+public class BuildingDAOImp extends BasicRepository<BuildingEntity> implements BuildingDAO{
 
 	@Override
 	public List<BuildingEntity> findBuilding(Integer floorArea, String name, String street, String district, String ward) {
@@ -87,47 +87,47 @@ public class BuildingDAOImp implements BuildingDAO{
 		return new ArrayList<>();
 		}
 
-	@Override
-	public void insert(BuildingEntity buildingEntity, String rentArea) {
-		Connection con = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		Long buildingId = null;
-		try {
-			con = ConnectionUtils.getConnection();
-			stmt = con.createStatement();
-			con.setAutoCommit(false);
-			String sql = "insert into buildings(name, floorArea) values ('"+buildingEntity.getName()+"','"+buildingEntity.getFloorArea()+"')";
-			int flag = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-			rs = stmt.getGeneratedKeys();
-			if(flag>0) {				
-				while(rs.next()){
-					buildingId = rs.getLong(1);
-				}
-			}
-			for(String item:rentArea.split(",")) {				
-				String sql1 = "insert into rent_area(value, building_id) values ('"+Integer.parseInt(item)+"','"+buildingId+"')";
-				stmt.executeUpdate(sql1);
-			}
-			con.commit();
-		}catch (Exception e) {
-			e.printStackTrace();
-			try {				
-				con.rollback();
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		finally {
-			try {
-				con.close();
-				stmt.close();
-				rs.close();				
-			} catch (Exception e2) {
-				e2.printStackTrace();
-			}
-		}
-		
-	}
+//	@Override
+//	public void insert(BuildingEntity buildingEntity, String rentArea) {
+//		Connection con = null;
+//		Statement stmt = null;
+//		ResultSet rs = null;
+//		Long buildingId = null;
+//		try {
+//			con = ConnectionUtils.getConnection();
+//			stmt = con.createStatement();
+//			con.setAutoCommit(false);
+//			String sql = "insert into buildings(name, floorArea) values ('"+buildingEntity.getName()+"','"+buildingEntity.getFloorArea()+"')";
+//			int flag = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+//			rs = stmt.getGeneratedKeys();
+//			if(flag>0) {				
+//				while(rs.next()){
+//					buildingId = rs.getLong(1);
+//				}
+//			}
+//			for(String item:rentArea.split(",")) {				
+//				String sql1 = "insert into rent_area(value, building_id) values ('"+Integer.parseInt(item)+"','"+buildingId+"')";
+//				stmt.executeUpdate(sql1);
+//			}
+//			con.commit();
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//			try {				
+//				con.rollback();
+//			} catch (Exception e2) {
+//				e2.printStackTrace();
+//			}
+//		}
+//		finally {
+//			try {
+//				con.close();
+//				stmt.close();
+//				rs.close();				
+//			} catch (Exception e2) {
+//				e2.printStackTrace();
+//			}
+//		}
+//		
+//	}
 
 }
