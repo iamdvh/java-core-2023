@@ -1,18 +1,16 @@
 package com.javacore.utils;
 
-import com.javacore.constant.BuildingConstant;
-
 public class BuildingTypeUtils {
-	public static String allTypes(String value){
-		if(value.equals(BuildingConstant.TANG_TRET_CODE)) {
-			return BuildingConstant.TANG_TRET_NAME;
+	public static String convertCodeToName(String value){
+		if(value.equals("TANG_TRET")) {
+			return "Tầng trệt";
 		}
-		else if (value.equals(BuildingConstant.NGUYEN_CAN_CODE)) {
-			return BuildingConstant.NGUYEN_CAN_NAME;
+		else if (value.equals("NGUYEN_CAN")) {
+			return "Nguyên căn";
+		}else if (value.equals("NOI_THAT")) {
+			return "Nội thất";
 		}
-		else{
-			return BuildingConstant.NOI_THAT_NAME;
-		}
+		return "";
 	}
 }
 	
