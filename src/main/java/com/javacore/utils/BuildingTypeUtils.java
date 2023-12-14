@@ -1,19 +1,19 @@
 package com.javacore.utils;
 
-import com.javacore.constant.BuildingConstant;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.javacore.enums.BuildingTypeEnum;
 
 public class BuildingTypeUtils {
-	public static String allTypes(String value){
-		switch (value) {
-		case BuildingConstant.TANG_TRET_CODE:
-			return BuildingConstant.TANG_TRET_NAME;
-		case BuildingConstant.NGUYEN_CAN_CODE:
-			return BuildingConstant.NGUYEN_CAN_NAME;
-		case BuildingConstant.NOI_THAT_CODE:
-			return BuildingConstant.NOI_THAT_NAME;
-		default:
-			return "";
+	public static String getType(String oldType){
+		List<String> newType = new ArrayList<String>();
+		if(oldType != null) {			
+			for(String str : oldType.split(", ")) {
+				newType.add(BuildingTypeEnum.valueOf(str).getType());
+			}
 		}
+		return String.join(", ", newType);
 	}
 }
 	
