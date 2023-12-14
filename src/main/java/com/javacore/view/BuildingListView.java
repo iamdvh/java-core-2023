@@ -1,7 +1,6 @@
 package com.javacore.view;
 
 import java.util.List;
-import java.util.Scanner;
 
 import com.javacore.controller.BuildingController;
 import com.javacore.input.BuildingSearchInput;
