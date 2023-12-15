@@ -11,7 +11,7 @@ public class BuildingListView {
 				Integer floorArea = null;
 				String street = null;
 				String district = null;
-				String ward = null;
+				String ward = "Phường số 2";
 				BuildingSearchInput buildingSearch = new BuildingSearchInput();
 				buildingSearch.setName(name);
 				buildingSearch.setFloorArea(floorArea);;
