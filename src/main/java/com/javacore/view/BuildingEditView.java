@@ -5,12 +5,12 @@ import com.javacore.dto.BuildingDTO;
 
 public class BuildingEditView {
 	public static void main(String[] args) {
-				String name = "Building 8";
+				String name = "Building 11";
 				Integer floorArea = 21;
 				String street = null;
 				String ward = null;
 				String district = null;
-				String rentArea = "21,22,900,100";
+				String rentArea = "290,980";
 				BuildingDTO buildingDto = new BuildingDTO();
 				buildingDto.setName(name);
 				buildingDto.setFloorArea(floorArea);

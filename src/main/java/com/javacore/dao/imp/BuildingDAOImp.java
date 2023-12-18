@@ -94,7 +94,7 @@ public class BuildingDAOImp implements BuildingDAO{
 			con = ConnectionUtils.getConnection();
 			stmt = con.createStatement();
 			con.setAutoCommit(false);
-			String sql = "insert into buildings(name, floorArea) values ("+buildingEntity.getName()+"','"+buildingEntity.getFloorArea()+"')";
+			String sql = "insert into buildings(name, floorArea) values ('"+buildingEntity.getName()+"','"+buildingEntity.getFloorArea()+"')";
 			int flag = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 			rs = stmt.getGeneratedKeys();
 			if(flag>0) {				
