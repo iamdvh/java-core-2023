@@ -24,13 +24,7 @@ public class BuildingServiceImp implements BuildingService{
 			buildingOutput.setName(item.getName());
 			buildingOutput.setFloorArea(item.getFloorArea());
 			buildingOutput.setAddress(item.getStreet()+" - " + item.getWard()+" - " + item.getDistrict());
-			List<String> newType = new ArrayList<String>();
-			if(item.getType() != null) {		
-				for (String oldType : item.getType().split(", ")) {
-					newType.add(BuildingTypeUtils.convertCodeToName(oldType));
-				}
-				buildingOutput.setType(String.join(", ", newType));
-			}
+			buildingOutput.setType(BuildingTypeUtils.getType(item.getType()));
 			buildingOutputs.add(buildingOutput);
 		}
 		return buildingOutputs;
