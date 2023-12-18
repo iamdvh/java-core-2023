@@ -41,9 +41,6 @@ public class BuildingDAOImp implements BuildingDAO{
 		if(!StringUtils.isNullOrEmpty(ward)) {
 			query.append(" and ward like'%"+ward+"%'");
 		}
-//		if(StringUtils.isNullOrEmpty(type)) {
-//			query.append(" and type like'%"+type+"%'");
-//		}
 		con = ConnectionUtils.getConnection();
 		stmt = con.createStatement();
 		rs = stmt.executeQuery(query.toString());
@@ -97,7 +94,7 @@ public class BuildingDAOImp implements BuildingDAO{
 			con = ConnectionUtils.getConnection();
 			stmt = con.createStatement();
 			con.setAutoCommit(false);
-			String sql = "insert into buildings(name, floorArea) values ('"+buildingEntity.getName()+"','"+buildingEntity.getFloorArea()+"')";
+			String sql = "insert into buildings(name, floorArea) values ("+buildingEntity.getName()+"','"+buildingEntity.getFloorArea()+"')";
 			int flag = stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
 			rs = stmt.getGeneratedKeys();
 			if(flag>0) {				
@@ -105,7 +102,7 @@ public class BuildingDAOImp implements BuildingDAO{
 					buildingId = rs.getLong(1);
 				}
 			}
-			for(String item:rentArea.split(",")) {				
+			for(String item : rentArea.split(",")) {				
 				String sql1 = "insert into rent_area(value, building_id) values ('"+Integer.parseInt(item)+"','"+buildingId+"')";
 				stmt.executeUpdate(sql1);
 			}
