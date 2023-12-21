@@ -1,19 +1,11 @@
-package com.javacore.dao.entity;
+package com.javacore.model.input;
 
-public class BuildingEntity {
-	private Long id;
+public class BuildingSearchInput {
 	private String name;
 	private Integer floorArea;
 	private String street;
 	private String district;
 	private String ward;
-	private String type;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	public String getName() {
 		return name;
 	}
@@ -44,11 +36,6 @@ public class BuildingEntity {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
+	
 	
 }

@@ -1,11 +1,26 @@
-package com.javacore.input;
+package com.javacore.model.dto;
 
-public class BuildingSearchInput {
+public class BuildingDTO extends BaseDTO {
 	private String name;
 	private Integer floorArea;
 	private String street;
-	private String district;
+	private Long  districtId;
 	private String ward;
+	private String rentArea;
+	private Integer rentPrice;
+
+	public Integer getRentPrice() {
+		return rentPrice;
+	}
+	public void setRentPrice(Integer rentPrice) {
+		this.rentPrice = rentPrice;
+	}
+	public String getRentArea() {
+		return rentArea;
+	}
+	public void setRentArea(String rentArea) {
+		this.rentArea = rentArea;
+	}
 	public String getName() {
 		return name;
 	}
@@ -24,11 +39,15 @@ public class BuildingSearchInput {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public String getDistrict() {
-		return district;
+
+
+
+
+	public Long getDistrictId() {
+		return districtId;
 	}
-	public void setDistrict(String district) {
-		this.district = district;
+	public void setDistrictId(Long districtId) {
+		this.districtId = districtId;
 	}
 	public String getWard() {
 		return ward;
@@ -36,6 +55,4 @@ public class BuildingSearchInput {
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
-	
-	
 }

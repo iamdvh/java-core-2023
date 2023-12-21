@@ -1,5 +1,8 @@
-package com.javacore.dao.entity;
-
+package com.javacore.repository.entity;
+import com.javacore.annotation.Entity;
+import com.javacore.annotation.Table;
+@Entity
+@Table(name = "customer")
 public class CustomerEntity {
 	private String fullname;
 	private int phone;

@@ -1,4 +1,4 @@
-package com.javacore.dto;
+package com.javacore.model.dto;
 
 public class BaseDTO {
 	private Long id;

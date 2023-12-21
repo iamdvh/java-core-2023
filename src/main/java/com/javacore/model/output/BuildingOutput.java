@@ -1,4 +1,4 @@
-package com.javacore.output;
+package com.javacore.model.output;
 
 public class BuildingOutput {
 	private String name;

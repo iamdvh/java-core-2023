@@ -1,4 +1,4 @@
-package com.javacore.input;
+package com.javacore.model.input;
 
 public class CustomerSearchInput {
 	private String fullname;
