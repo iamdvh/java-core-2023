@@ -4,7 +4,7 @@ import com.javacore.controller.BuildingController;
 
 public class BuildingDeleteView {
 public static void main(String[] args) {
-	Long id = (long) 8;
+	Long id = 9L;
 	BuildingController buildingController = new BuildingController();
 	buildingController.delete(id);
 }

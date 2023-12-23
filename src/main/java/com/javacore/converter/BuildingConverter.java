@@ -10,7 +10,7 @@ public class BuildingConverter {
 		BuildingOutput buildingOutput = new BuildingOutput();
 		buildingOutput.setName(buildingEntity.getName());
 		buildingOutput.setFloorArea(buildingEntity.getFloorArea());
-		buildingOutput.setAddress(buildingEntity.getStreet()+" - " + buildingEntity.getWard());
+		buildingOutput.setAddress(buildingEntity.getStreet()+" - " + buildingEntity.getWard() + " - " + buildingEntity.getDistrictId());
 //		buildingOutput.setType(BuildingTypeUtils.getName(buildingEntity.getType()));
 		return buildingOutput;
 	}

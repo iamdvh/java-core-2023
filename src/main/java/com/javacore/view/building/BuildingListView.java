@@ -11,7 +11,7 @@ public class BuildingListView {
 				 for (BuildingOutput item : buildings) {
 				      System.out.println("Name: " + item.getName());
 				      System.out.println("Address: " + item.getAddress());
-				      System.out.println("Type: " +item.getType());
+//				      System.out.println("Type: " +item.getType());
 				      System.out.println("---------------------------------");
 				    }
 	}

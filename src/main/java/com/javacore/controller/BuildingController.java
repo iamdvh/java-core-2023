@@ -14,9 +14,6 @@ public class BuildingController {
 	    List<BuildingOutput> results =	buildingService.findBuilding(buildingSearch);
 		return results;
 	}
-	public void save(BuildingDTO buildingDto) {
-//		buildingService.insert(buildingDto);
-	};
 	public List<BuildingOutput> findAll(){
 		return buildingService.findAll();
 	}

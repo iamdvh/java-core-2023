@@ -20,7 +20,7 @@ public class BuildingServiceImp implements BuildingService{
 		// TODO Auto-generated method stub
 		List<BuildingOutput> buildingOutputs = new ArrayList<>();
 		List<BuildingEntity> buildingEntity =  buildingRepository.findBuilding(buildingSearchInput.getFloorArea(), buildingSearchInput.getName(), buildingSearchInput.getStreet(),
-				buildingSearchInput.getDistrict(), buildingSearchInput.getWard());
+				buildingSearchInput.getDistrictId(), buildingSearchInput.getWard());
 		for (BuildingEntity item : buildingEntity) {
 			BuildingOutput buildingOutput = buildingConverter.convertBuildingEntityToBuildingOutput(item);
 			buildingOutputs.add(buildingOutput);
