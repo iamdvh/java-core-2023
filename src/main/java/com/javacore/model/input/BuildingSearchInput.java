@@ -16,7 +16,7 @@ public class BuildingSearchInput {
 	private String managerName;
 	private String managerPhone;
 	private Long staff;
-	private String type;
+	private String[] type;
 	public String getName() {
 		return name;
 	}
@@ -108,10 +108,10 @@ public class BuildingSearchInput {
 	public void setStaff(Long staff) {
 		this.staff = staff;
 	}
-	public String getType() {
+	public String[] getType() {
 		return type;
 	}
-	public void setType(String type) {
+	public void setType(String[] type) {
 		this.type = type;
 	}
 	

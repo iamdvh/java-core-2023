@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.javacore.model.dto.BuildingDTO;
 import com.javacore.model.input.AssignmentBuildingInput;
-import com.javacore.model.input.BuildingSearchInput;
 import com.javacore.model.output.BuildingOutput;
 import com.javacore.repository.BuildingRentTypeRespository;
 import com.javacore.repository.DistrictRepository;
@@ -26,7 +25,7 @@ public class BuildingConverter {
 		BuildingRentTypeRespository buildingRentTypeRespository = new BuildingRentTypeRespositoryImpl();
 		String districtName = null;
 		if(buildingEntity.getDistrictId() != null) {
-			 List<DistrictEntity> district = districtRepository.findDistrict(buildingEntity.getDistrictId(),null);
+			 List<DistrictEntity> district = districtRepository.findDistrict(buildingEntity.getDistrictId());
 			 for (DistrictEntity item : district) {	
 				 districtName = item.getName();
 			}

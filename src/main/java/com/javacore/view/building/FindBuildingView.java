@@ -1,9 +1,10 @@
 package com.javacore.view.building;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.javacore.controller.BuildingController;
-import com.javacore.model.input.BuildingSearchInput;
 import com.javacore.model.output.BuildingOutput;
 
 public class FindBuildingView {
@@ -22,25 +23,26 @@ public class FindBuildingView {
 		Integer rentPriceTo = null;
 		String managerName = null;
 		String managerPhone = null;
-		Long staff = 3l;
-		String type = null;
-		BuildingSearchInput buildingSearchInput = new BuildingSearchInput();
-		buildingSearchInput.setName(name);
-		buildingSearchInput.setFloorArea(floorArea);
-		buildingSearchInput.setDistrictCode(districtCode);
-		buildingSearchInput.setWard(ward);
-		buildingSearchInput.setStreet(street);
-		buildingSearchInput.setNumberOfBasement(numberOfBasement);
-		buildingSearchInput.setDirection(direction);
-		buildingSearchInput.setLevel(level);
-		buildingSearchInput.setRentAreaFrom(rentAreaFrom);
-		buildingSearchInput.setRentAreaTo(rentAreaTo);
-		buildingSearchInput.setRentPriceFrom(rentPriceFrom);
-		buildingSearchInput.setRentPriceTo(rentPriceTo);
-		buildingSearchInput.setManagerName(managerName);
-		buildingSearchInput.setManagerPhone(managerPhone);
-		buildingSearchInput.setStaff(staff);
-		buildingSearchInput.setType(type);
+		Long staff = null;
+		String[] type = {"tang-tret", "nguyen-can"};
+		Map<String, Object> buildingSearchInput = new HashMap<>();
+		buildingSearchInput.put("name", name);
+		
+		buildingSearchInput.put("floorArea",floorArea);
+		buildingSearchInput.put("districtCode",districtCode);
+		buildingSearchInput.put("ward",ward);
+		buildingSearchInput.put("street",street);
+		buildingSearchInput.put("numberOfBasement", numberOfBasement);
+		buildingSearchInput.put("direction",direction);
+		buildingSearchInput.put("level",level);
+		buildingSearchInput.put("rentAreaFrom",rentAreaFrom);
+		buildingSearchInput.put("rentAreaTo",rentAreaTo);
+		buildingSearchInput.put("rentPriceFrom",rentPriceFrom);
+		buildingSearchInput.put("rentPriceTo",rentPriceTo);
+		buildingSearchInput.put("mangerName",managerName);
+		buildingSearchInput.put("managerPhone",managerPhone);
+		buildingSearchInput.put("staff",staff);
+		buildingSearchInput.put("type",type);
 		BuildingController buildingController = new BuildingController();
 		List<BuildingOutput> buildings = buildingController.findBuilding(buildingSearchInput);
 		for (BuildingOutput building : buildings) {

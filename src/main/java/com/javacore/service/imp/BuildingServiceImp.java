@@ -2,23 +2,21 @@ package com.javacore.service.imp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.javacore.converter.BuildingConverter;
 import com.javacore.model.dto.BuildingDTO;
 import com.javacore.model.input.AssignmentBuildingInput;
-import com.javacore.model.input.BuildingSearchInput;
 import com.javacore.model.output.BuildingOutput;
 import com.javacore.repository.AssignmentBuilding;
 import com.javacore.repository.BuildingRepository;
 import com.javacore.repository.DistrictRepository;
 import com.javacore.repository.entity.AssignmentBuildingEntity;
 import com.javacore.repository.entity.BuildingEntity;
-import com.javacore.repository.entity.DistrictEntity;
 import com.javacore.repository.impl.AssignmentBuildingImpl;
 import com.javacore.repository.impl.BuildingRepositoryImp;
 import com.javacore.repository.impl.DistrictRepositoryImpl;
 import com.javacore.service.BuildingService;
-import com.javacore.utils.StringUtils;
 
 public class BuildingServiceImp implements BuildingService{
 	DistrictRepository districtRepository = new DistrictRepositoryImpl();
@@ -26,33 +24,19 @@ public class BuildingServiceImp implements BuildingService{
 	BuildingConverter buildingConverter = new BuildingConverter();
 	AssignmentBuilding assignmentBuilding = new AssignmentBuildingImpl();
 	@Override
-	public List<BuildingOutput> findBuilding(BuildingSearchInput buildingSearchInput) {
+	public List<BuildingOutput> findBuilding(Map<String, Object> buildingSearchInput) {
 		List<BuildingOutput> buildingOutputs = new ArrayList<>();
-		Long districtId = null;
-		if(!StringUtils.isNullOrEmpty(buildingSearchInput.getDistrictCode())) {
-			 List<DistrictEntity> district = districtRepository.findDistrict(null,buildingSearchInput.getDistrictCode());
-			 for (DistrictEntity districtEntity : district) {
-				 districtId = districtEntity.getId();
-			}
-			 if(districtId == null) {
-				 districtId = -1L;
-			 }
-		}
 		// type
 		String types = null;
-		if(!StringUtils.isNullOrEmpty(buildingSearchInput.getType())) {
-			List<String> type = new ArrayList<String>();
-			for (String item : buildingSearchInput.getType().split(",")) {
-				type.add("'"+item+"'");
+		if(buildingSearchInput.get("type") != null) {
+			List<String> preType = new ArrayList<>();
+			for (String type : (String[])  buildingSearchInput.get("type")) {
+				preType.add("'"+type+"'");
 			}
-			types = String.join(",", type);
+			types = String.join(",", preType);
+			buildingSearchInput.put("type", types);
 		}
-		List<BuildingEntity> buildingEntity =  buildingRepository.findBuilding(buildingSearchInput.getFloorArea(), buildingSearchInput.getName(), buildingSearchInput.getStreet(),
-				districtId, buildingSearchInput.getWard(), 
-				buildingSearchInput.getNumberOfBasement(), buildingSearchInput.getDirection(), buildingSearchInput.getLevel(),
-				buildingSearchInput.getRentAreaFrom(), buildingSearchInput.getRentAreaTo(),
-				buildingSearchInput.getRentPriceFrom(), buildingSearchInput.getRentPriceTo(), types, buildingSearchInput.getManagerName(),
-				buildingSearchInput.getManagerPhone(), buildingSearchInput.getStaff());
+		List<BuildingEntity> buildingEntity =  buildingRepository.findBuilding(buildingSearchInput);
 		for (BuildingEntity item : buildingEntity) {
 
 			BuildingOutput buildingOutput = buildingConverter.convertBuildingEntityToBuildingOutput(item);

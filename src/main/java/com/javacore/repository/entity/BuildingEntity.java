@@ -16,6 +16,7 @@ public class BuildingEntity extends BaseEntity{
 	private String ward;
 	@Column(name = "districtid")
 	private Long districtId;
+	private String districtCode;
 	private String districtName;
 	@Column(name = "rentprice")
 	private Integer rentPrice;
@@ -121,5 +122,10 @@ public class BuildingEntity extends BaseEntity{
 	public void setManagerPhone(String managerPhone) {
 		this.managerPhone = managerPhone;
 	}
-	
+	public String getDistrictCode() {
+		return districtCode;
+	}
+	public void setDistrictCode(String districtCode) {
+		this.districtCode = districtCode;
+	}
 }
