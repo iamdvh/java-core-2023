@@ -16,21 +16,21 @@ public class BuildingEntity extends BaseEntity{
 	private String ward;
 	@Column(name = "districtid")
 	private Long districtId;
+	private String districtName;
 	@Column(name = "rentprice")
 	private Integer rentPrice;
-	
-	public Integer getRentPrice() {
-		return rentPrice;
-	}
-	public void setRentPrice(Integer rentPrice) {
-		this.rentPrice = rentPrice;
-	}
-	public Long getDistrictId() {
-		return districtId;
-	}
-	public void setDistrictId(Long districtId) {
-		this.districtId = districtId;
-	}
+	@Column(name = "rentarea")
+	private String rentArea;
+	@Column(name = "name")
+	private String type;
+	@Column(name = "managername")
+	private String managerName;
+	@Column(name = "managerphone")
+	private String managerPhone;
+	private Integer rentAreaFrom;
+	private Integer rentAreaTo;	
+	private Integer rentPriceFrom;
+	private Integer rentPriceTo;
 	public String getName() {
 		return name;
 	}
@@ -55,4 +55,71 @@ public class BuildingEntity extends BaseEntity{
 	public void setWard(String ward) {
 		this.ward = ward;
 	}
+	public Long getDistrictId() {
+		return districtId;
+	}
+	public void setDistrictId(Long districtId) {
+		this.districtId = districtId;
+	}
+	public Integer getRentPrice() {
+		return rentPrice;
+	}
+	public void setRentPrice(Integer rentPrice) {
+		this.rentPrice = rentPrice;
+	}
+	public Integer getRentPriceFrom() {
+		return rentPriceFrom;
+	}
+	public void setRentPriceFrom(Integer rentPriceFrom) {
+		this.rentPriceFrom = rentPriceFrom;
+	}
+	public Integer getRentPriceTo() {
+		return rentPriceTo;
+	}
+	public void setRentPriceTo(Integer rentPriceTo) {
+		this.rentPriceTo = rentPriceTo;
+	}
+	public Integer getRentAreaFrom() {
+		return rentAreaFrom;
+	}
+	public void setRentAreaFrom(Integer rentAreaFrom) {
+		this.rentAreaFrom = rentAreaFrom;
+	}
+	public Integer getRentAreaTo() {
+		return rentAreaTo;
+	}
+	public void setRentAreaTo(Integer rentAreaTo) {
+		this.rentAreaTo = rentAreaTo;
+	}
+	public String getDistrictName() {
+		return districtName;
+	}
+	public void setDistrictName(String districtName) {
+		this.districtName = districtName;
+	}
+	public String getRentArea() {
+		return rentArea;
+	}
+	public void setRentArea(String rentArea) {
+		this.rentArea = rentArea;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getManagerName() {
+		return managerName;
+	}
+	public void setManagerName(String managerName) {
+		this.managerName = managerName;
+	}
+	public String getManagerPhone() {
+		return managerPhone;
+	}
+	public void setManagerPhone(String managerPhone) {
+		this.managerPhone = managerPhone;
+	}
+	
 }

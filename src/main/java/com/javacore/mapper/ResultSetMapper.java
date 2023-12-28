@@ -12,7 +12,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import com.javacore.annotation.Column;
 
 public class ResultSetMapper<T> {
-	public List<T> mapRow(ResultSet rs, Class<T> tClass){
+	public List<T> mapRow(ResultSet rs, Class<T> tClass) {
 		List<T> results = new ArrayList<>();
 		try {
 			Field[] fields = tClass.getDeclaredFields();
@@ -21,12 +21,13 @@ public class ResultSetMapper<T> {
 				T object = tClass.newInstance();
 				for (int i = 0; i < resultSetMetaData.getColumnCount(); i++) {
 					String columnName = resultSetMetaData.getColumnName(i + 1);
-					Object clumnValue = rs.getObject(i + 1);
+					Object columnValue = rs.getObject(i + 1);
 					for (Field field : fields) {
 						if (field.isAnnotationPresent(Column.class)) {
 							Column column = field.getAnnotation(Column.class);
-							if (column.name().equals(columnName) && columnName != null) {
-								BeanUtils.setProperty(object, field.getName(), clumnValue);
+							field.setAccessible(true);
+							if (column.name().equals(columnName) && columnName != null && field.get(object) == null) {
+								BeanUtils.setProperty(object, field.getName(), columnValue);
 								break;
 							}
 						}
@@ -37,7 +38,7 @@ public class ResultSetMapper<T> {
 							if (field.isAnnotationPresent(Column.class)) {
 								Column column = field.getAnnotation(Column.class);
 								if (column.name().equals(columnName) && columnName != null) {
-									BeanUtils.setProperty(object, field.getName(), clumnValue);
+									BeanUtils.setProperty(object, field.getName(), columnValue);
 									break;
 								}
 							}
@@ -47,10 +48,10 @@ public class ResultSetMapper<T> {
 				}
 				results.add(object);
 			}
-		} catch ( SQLException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
+		} catch (SQLException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
 			// TODO: handle exception
 		}
-		
+
 		return results;
 	}
 }

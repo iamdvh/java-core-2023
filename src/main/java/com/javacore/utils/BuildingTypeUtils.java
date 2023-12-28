@@ -3,13 +3,13 @@ package com.javacore.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javacore.enums.BuildingEnum;
+import com.javacore.enums.BuildingTypeEnum;
 
 public class BuildingTypeUtils {
 	public static String getName(String value){
 		List<String> newType = new ArrayList<>();
 		for(String oldType : value.split(", ")) {
-			newType.add(BuildingEnum.valueOf(oldType).getBuildingName());
+			newType.add(BuildingTypeEnum.valueOf(oldType).getBuildingName());
 		}
 		return String.join(", ", newType);
 	}

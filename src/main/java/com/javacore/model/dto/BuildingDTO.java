@@ -4,8 +4,8 @@ public class BuildingDTO extends BaseDTO {
 	private String name;
 	private Integer floorArea;
 	private String street;
-	private Long  districtId;
 	private String ward;
+	private Long  districtId;
 	private String rentArea;
 	private Integer rentPrice;
 

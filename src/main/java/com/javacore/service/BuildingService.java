@@ -3,6 +3,7 @@ package com.javacore.service;
 import java.util.List;
 
 import com.javacore.model.dto.BuildingDTO;
+import com.javacore.model.input.AssignmentBuildingInput;
 import com.javacore.model.input.BuildingSearchInput;
 import com.javacore.model.output.BuildingOutput;
 
@@ -12,4 +13,6 @@ public interface BuildingService {
 	public BuildingDTO findById(Long id);
 	public void insert(BuildingDTO buildingDTO);
 	public void delete(Long id);
+	public void assignmentBuilding(AssignmentBuildingInput assignmentBuildingInput);
+	public void assignmentBuildingEdit(AssignmentBuildingInput assignmentBuildingInput, Long[] newStaff);
 }

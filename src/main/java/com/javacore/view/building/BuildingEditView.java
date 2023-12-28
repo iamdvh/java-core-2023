@@ -5,8 +5,8 @@ import com.javacore.model.dto.BuildingDTO;
 
 public class BuildingEditView {
 	public static void main(String[] args) {
-		Long id =  9L;
-		String name = null;
+		Long id =  12L;
+		String name = "Test update";
 		Integer floorArea = 100;
 		String street = "32 Lý Chính Thắng";
 		String ward = "Phường 7";

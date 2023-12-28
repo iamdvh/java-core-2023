@@ -10,23 +10,49 @@ public class FindBuildingView {
 	public static void main(String[] args) {
 		String name = null;
 		Integer floorArea = null;
-		String street = null;
+		String districtCode = null;
 		String ward = null;
-		Long districtId =1L;
-		Integer rentPrice = null;
-		BuildingSearchInput buildingInput = new BuildingSearchInput();
-		buildingInput.setName(name);
-		buildingInput.setFloorArea(floorArea);
-		buildingInput.setRentPrice(rentPrice);
-		buildingInput.setStreet(street);
-		buildingInput.setWard(ward);
-		buildingInput.setDistrictId(districtId);
+		String street = null;
+		Integer numberOfBasement = null;
+		String direction = null;
+		String level = null;
+		Integer rentAreaFrom = null;
+		Integer rentAreaTo = null;
+		Integer rentPriceFrom = null;
+		Integer rentPriceTo = null;
+		String managerName = null;
+		String managerPhone = null;
+		Long staff = 3l;
+		String type = null;
+		BuildingSearchInput buildingSearchInput = new BuildingSearchInput();
+		buildingSearchInput.setName(name);
+		buildingSearchInput.setFloorArea(floorArea);
+		buildingSearchInput.setDistrictCode(districtCode);
+		buildingSearchInput.setWard(ward);
+		buildingSearchInput.setStreet(street);
+		buildingSearchInput.setNumberOfBasement(numberOfBasement);
+		buildingSearchInput.setDirection(direction);
+		buildingSearchInput.setLevel(level);
+		buildingSearchInput.setRentAreaFrom(rentAreaFrom);
+		buildingSearchInput.setRentAreaTo(rentAreaTo);
+		buildingSearchInput.setRentPriceFrom(rentPriceFrom);
+		buildingSearchInput.setRentPriceTo(rentPriceTo);
+		buildingSearchInput.setManagerName(managerName);
+		buildingSearchInput.setManagerPhone(managerPhone);
+		buildingSearchInput.setStaff(staff);
+		buildingSearchInput.setType(type);
 		BuildingController buildingController = new BuildingController();
-		List<BuildingOutput> buildings =  buildingController.findBuilding(buildingInput);
-		for (BuildingOutput item : buildings) {
-		      System.out.println("Name: " + item.getName());
-		      System.out.println("Address: " + item.getAddress());
-		      System.out.println("---------------------------------");
-		    }
+		List<BuildingOutput> buildings = buildingController.findBuilding(buildingSearchInput);
+		for (BuildingOutput building : buildings) {
+			System.out.println("Name: " + building.getName());
+			System.out.println("Address : " + building.getAddress());
+			System.out.println("Manager name: " + building.getManagerName());
+			System.out.println("Manager phone: "+building.getManagerPhone());
+			System.out.println("Floor area  : " + building.getFloorArea());
+			System.out.println("Rent area: " + building.getRenArea());
+			System.out.println("Rent price : " + building.getRentPrice());
+			System.out.println("Type: " + building.getType());
+			System.out.println("---------------------------------");
+		}
 	}
 }
