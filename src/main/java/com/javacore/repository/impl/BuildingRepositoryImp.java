@@ -11,84 +11,106 @@ import com.javacore.utils.StringUtils;
 public class BuildingRepositoryImp extends SimpleRepository<BuildingEntity> implements BuildingRepository {
 
 	@Override
-	public List<BuildingEntity> findBuilding(Map<String, Object> buildingSearchInput) {
-		
-				String join = null;
-				String condition = null;
-				String noJoin = sqlNoJoin(buildingSearchInput);
-				String[] haveJoin = sqlJoin(buildingSearchInput);
-				condition = noJoin += haveJoin[1];
-				join = haveJoin[0];
-				StringBuilder query = new StringBuilder("select  b.* from building b " + join + SystemConstant.ONE_EQUAL_ONE + condition+" group by b.id");
-		return findByCondition(query.toString());
+	public List<BuildingEntity> findBuilding(Map<String, Object> params, List<String> types) {
+
+		StringBuilder joinQuery = new StringBuilder();
+		StringBuilder whereQuery = new StringBuilder();
+		StringBuilder finalQuery = new StringBuilder(
+				"select  b.id, b.name, b.districtid, b.street, b.ward, b.numberofbasement, b.floorarea,"
+						+ "b.rentprice, b.managername, b.managerphone");
+		finalQuery.append("\nfrom building b");
+		buildSpecialQuery(params, types, joinQuery, whereQuery);
+		buildNormalQuery(params, whereQuery);
+
+		finalQuery.append(joinQuery).append("\n" + SystemConstant.ONE_EQUAL_ONE).append(whereQuery)
+				.append("\ngroup by b.id");
+		System.out.println("Final query: " + finalQuery.toString());
+		System.out.println("-------------------------------------------");
+		return findByCondition(finalQuery.toString());
 	}
-	private String[] sqlJoin(Map<String, Object> buildingSearchInput) {
-		StringBuilder join = new StringBuilder();
-		StringBuilder condition = new StringBuilder();
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("districtCode"))) {
-			join.append("join district d on b.districtid = d.id ");
-			condition.append(" and d.code like'%" + (String)buildingSearchInput.get("districtCode") + "%'");
+
+	private void buildSpecialQuery(Map<String, Object> params, List<String> types, StringBuilder joinQuery,
+			StringBuilder whereQuery) {
+		String districtCode = (String) params.get("districtCode");
+		Integer rentAreaFrom = (Integer) params.get("rentAreaFrom");
+		Integer rentAreaTo = (Integer) params.get("rentAreaTo");
+		Long staff = (Long) params.get("staff");
+
+		if (!StringUtils.isNullOrEmpty(districtCode)) {
+			joinQuery.append("\njoin district d on b.districtid = d.id ");
+			whereQuery.append("\nand d.code like'%" + districtCode + "%'");
 		}
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("managerName"))) {
-			condition.append(" and b.managername like'%" + (String)buildingSearchInput.get("managerName") + "%'");
-		}
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("managerPhone"))) {
-			condition.append(" and b.managerphone like'%" + (String)buildingSearchInput.get("managerPhone") + "%'");
-		}
-		if ((Integer)buildingSearchInput.get("rentAreaFrom") != null | (Integer)buildingSearchInput.get("rentAreaTo") != null) {
-			join.append("join rentarea r on b.id = r.buildingid " + "join buildingrenttype t on b.id = t.buildingid ");
-			if ((Integer)buildingSearchInput.get("rentAreaFrom") != null && (Integer)buildingSearchInput.get("rentAreaTo") != null) {
-				condition.append(" and r.value between " + (Integer)buildingSearchInput.get("rentAreaFrom") + " and " + (Integer)buildingSearchInput.get("rentAreaTo") + "");
-			} else if ((Integer)buildingSearchInput.get("rentAreaTo") != null) {
-				condition.append(" and r.value <= " + (Integer)buildingSearchInput.get("rentAreaTo") + "");
-			} else if ((Integer)buildingSearchInput.get("rentAreaFrom") != null) {
-				condition.append(" and r.value >= " + (Integer)buildingSearchInput.get("rentAreaFrom") + "");
+		if (rentAreaFrom != null | rentAreaTo != null) {
+			joinQuery.append(
+					"\njoin rentarea r on b.id = r.buildingid " + "join buildingrenttype t on b.id = t.buildingid ");
+			if (rentAreaFrom != null && rentAreaTo != null) {
+				whereQuery.append("\nand r.value between " + rentAreaFrom + " and " + rentAreaTo + "");
+			} else if (rentAreaTo != null) {
+				whereQuery.append("\nand r.value <= " + rentAreaTo + "");
+			} else if (rentAreaFrom != null) {
+				whereQuery.append("\nand r.value >= " + rentAreaFrom + "");
 			}
 		}
-		if ((Integer)buildingSearchInput.get("rentPriceFrom") != null | (Integer)buildingSearchInput.get("rentPriceTo") != null) {
-			if ((Integer)buildingSearchInput.get("rentPriceFrom") != null && (Integer)buildingSearchInput.get("rentPriceTo") != null) {
-				condition.append(" and rentprice between " + (Integer)buildingSearchInput.get("rentPriceFrom") + " and " + (Integer)buildingSearchInput.get("rentPriceTo") + "");
-			} else if ((Integer)buildingSearchInput.get("rentPriceTo") == null) {
-				condition.append(" and rentprice >= " + (Integer)buildingSearchInput.get("rentPriceFrom") + "");
+		if (types.size() > 0) {
+			joinQuery.append(
+					"\njoin buildingrenttype t on t.buildingid = b.id join renttype rt on t.renttypeid = rt.id ");
+			String type = String.join(",", types);
+			whereQuery.append("\nand rt.code in(" + type + ")");
+		}
+		if (staff != null) {
+			joinQuery.append("\njoin assignmentbuilding a on a.buildingid = b.id ");
+			whereQuery.append("\nand a.staffid = " + staff + "");
+		}
+	}
+
+	private void buildNormalQuery(Map<String, Object> params, StringBuilder whereQuery) {
+		String name = (String) params.get("name");
+		Long floorArea = (Long) params.get("floorArea");
+		String street = (String) params.get("street");
+		String ward = (String) params.get("ward");
+		Integer numberOfBasement = (Integer) params.get("numberOfBasement");
+		String direction = (String) params.get("direction");
+		String level = (String) params.get("level");
+		String managerName = (String) params.get("managerName");
+		String managerPhone = (String) params.get("managerPhone");
+		Integer rentPriceTo = (Integer) params.get("rentPriceTo");
+		Integer rentPriceFrom = (Integer) params.get("rentPriceFrom");
+		if (!StringUtils.isNullOrEmpty(name)) {
+			whereQuery.append("\nand b.name like'%" + name + "%'");
+		}
+		if (floorArea != null) {
+			whereQuery.append("\nand b.floorArea like'%" + floorArea + "%'");
+		}
+		if (!StringUtils.isNullOrEmpty(street)) {
+			whereQuery.append("\nand b.street like'%" + street + "%'");
+		}
+		if (!StringUtils.isNullOrEmpty(ward)) {
+			whereQuery.append("\nand ward like'%" + ward + "%'");
+		}
+		if (numberOfBasement != null) {
+			whereQuery.append("\nand numberOfBasement like'%" + numberOfBasement + "%'");
+		}
+		if (!StringUtils.isNullOrEmpty(direction)) {
+			whereQuery.append("\nand direction like'%" + direction + "%'");
+		}
+		if (!StringUtils.isNullOrEmpty(level)) {
+			whereQuery.append("\nand level like'%" + level + "%'");
+		}
+		if (!StringUtils.isNullOrEmpty(managerName)) {
+			whereQuery.append("\nand b.managername like'%" + managerName + "%'");
+		}
+		if (rentPriceFrom != null | rentPriceTo != null) {
+			if (rentPriceFrom != null && rentPriceTo != null) {
+				whereQuery.append("\nand rentprice between " + rentPriceFrom + "\nand " + rentPriceTo + "");
+			} else if (rentPriceTo == null) {
+				whereQuery.append("\nand rentprice >= " + rentPriceFrom + "");
 			} else {
-				condition.append(" and rentprice <= " + (Integer)buildingSearchInput.get("rentPriceTo") + "");
+				whereQuery.append("\nand rentprice <= " + rentPriceTo + "");
 			}
 		}
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("type"))) {
-			join.append("join buildingrenttype t on t.buildingid = b.id join renttype rt on t.renttypeid = rt.id ");
-			condition.append(" and rt.code in(" + (String)buildingSearchInput.get("type") + ")");
+		if (!StringUtils.isNullOrEmpty(managerPhone)) {
+			whereQuery.append("\nand b.managerphone like'%" + managerPhone + "%'");
 		}
-		if ((Long)buildingSearchInput.get("staff") != null) {
-			join.append("join assignmentbuilding a on a.buildingid = b.id ");
-			condition.append(" and a.staffid = " + (Long)buildingSearchInput.get("staff") + "");
-		}
-		String[] sql = {join.toString(), condition.toString()};
-		return sql;
 	}
-	private String sqlNoJoin(Map<String, Object> buildingSearchInput) {
-		StringBuilder condition = new StringBuilder();
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("name"))) {
-			condition.append(" and b.name like'%" + (String)buildingSearchInput.get("name") + "%'");
-		}
-		if ((Long)buildingSearchInput.get("floorArea") != null) {
-			condition.append(" and b.floorArea like'%" + (Long)buildingSearchInput.get("floorArea") + "%'");
-		}
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("street"))) {
-			condition.append(" and b.street like'%" + (String)buildingSearchInput.get("street") + "%'");
-		}
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("ward"))) {
-			condition.append(" and ward like'%" + (String)buildingSearchInput.get("ward") + "%'");
-		}
-		if ((Integer)buildingSearchInput.get("numberOfBasement") != null) {
-			condition.append(" and numberOfBasement like'%" + (Integer)buildingSearchInput.get("numberOfBasement") + "%'");
-		}
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("direction"))) {
-			condition.append(" and direction like'%" + (String)buildingSearchInput.get("direction") + "%'");
-		}
-		if (!StringUtils.isNullOrEmpty((String)buildingSearchInput.get("level"))) {
-			condition.append(" and level like'%" + (String)buildingSearchInput.get("level") + "%'");
-		}
-		return condition.toString();
-	}
-	
+
 }

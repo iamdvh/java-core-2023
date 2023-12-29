@@ -27,16 +27,13 @@ public class BuildingServiceImp implements BuildingService{
 	public List<BuildingOutput> findBuilding(Map<String, Object> buildingSearchInput) {
 		List<BuildingOutput> buildingOutputs = new ArrayList<>();
 		// type
-		String types = null;
+		List<String> types = new ArrayList<>();
 		if(buildingSearchInput.get("type") != null) {
-			List<String> preType = new ArrayList<>();
 			for (String type : (String[])  buildingSearchInput.get("type")) {
-				preType.add("'"+type+"'");
+				types.add("'"+type+"'");
 			}
-			types = String.join(",", preType);
-			buildingSearchInput.put("type", types);
 		}
-		List<BuildingEntity> buildingEntity =  buildingRepository.findBuilding(buildingSearchInput);
+		List<BuildingEntity> buildingEntity =  buildingRepository.findBuilding(buildingSearchInput, types);
 		for (BuildingEntity item : buildingEntity) {
 
 			BuildingOutput buildingOutput = buildingConverter.convertBuildingEntityToBuildingOutput(item);
@@ -79,32 +76,18 @@ public class BuildingServiceImp implements BuildingService{
 	}
 	@Override
 	public void assignmentBuilding(AssignmentBuildingInput assignmentBuildingInput) {
-		for (Long item : assignmentBuildingInput.getStaffId()) {
+		if(assignmentBuildingInput.getStaffToDelete()!= null) {
+			for (Long item : assignmentBuildingInput.getStaffToDelete()) {
+				AssignmentBuildingEntity assignmentBuildingEntity = buildingConverter.convertASMBEToABI(assignmentBuildingInput, item);
+				List<AssignmentBuildingEntity> assignmentBuildingEntities = assignmentBuilding.findAssignmentBuilding(assignmentBuildingEntity.getBuildingId(), item);
+				for (AssignmentBuildingEntity itemDelete : assignmentBuildingEntities) {
+					assignmentBuilding.delete(itemDelete.getId());
+				}
+			}
+		}
+		for (Long item : assignmentBuildingInput.getStaffToAdd()) {
 			AssignmentBuildingEntity assignmentBuildingEntity = buildingConverter.convertASMBEToABI(assignmentBuildingInput, item);
 			assignmentBuilding.insert(assignmentBuildingEntity);
-		}
-	}
-	@Override
-	public void assignmentBuildingEdit(AssignmentBuildingInput assignmentBuildingInput, Long[] newStaffs) {
-		boolean[] check = new boolean[newStaffs.length];
-		int count=0;
-		for (Long oldStaff : assignmentBuildingInput.getStaffId()) {
-			AssignmentBuildingEntity assignmentBuildingEntity= buildingConverter.convertASMBEToABI(assignmentBuildingInput, oldStaff);
-			List<AssignmentBuildingEntity> assignmentBuildingEntities = assignmentBuilding.findAssignmentBuilding(assignmentBuildingEntity.getBuildingId(), oldStaff);
-			Long id = null;
-			for (AssignmentBuildingEntity item : assignmentBuildingEntities) {
-				id = item.getId();
-			}
-			for (Long newstaff : newStaffs) {
-				if(check[count] == false) {					
-					assignmentBuildingEntity.setId(id);
-					assignmentBuildingEntity.setStaffId(newstaff);
-					assignmentBuilding.update(assignmentBuildingEntity);
-					check[count] = true;
-					break;
-				}
-				count++;
-			}
 		}
 	}
 }      

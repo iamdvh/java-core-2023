@@ -25,10 +25,8 @@ public class BuildingConverter {
 		BuildingRentTypeRespository buildingRentTypeRespository = new BuildingRentTypeRespositoryImpl();
 		String districtName = null;
 		if(buildingEntity.getDistrictId() != null) {
-			 List<DistrictEntity> district = districtRepository.findDistrict(buildingEntity.getDistrictId());
-			 for (DistrictEntity item : district) {	
-				 districtName = item.getName();
-			}
+			 DistrictEntity district = districtRepository.findById(buildingEntity.getDistrictId());
+				 districtName = district.getName();
 		}
 		// rent area
 		List<RentAreaEntity> rentArea = rentAreaRespository.findRentArea(buildingEntity.getId());

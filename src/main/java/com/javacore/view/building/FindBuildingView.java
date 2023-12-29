@@ -24,7 +24,7 @@ public class FindBuildingView {
 		String managerName = null;
 		String managerPhone = null;
 		Long staff = null;
-		String[] type = null;
+		String[] type = {"noi-that"};
 		Map<String, Object> buildingSearchInput = new HashMap<>();
 		buildingSearchInput.put("name", name);
 		buildingSearchInput.put("floorArea",floorArea);

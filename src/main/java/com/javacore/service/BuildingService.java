@@ -14,5 +14,4 @@ public interface BuildingService {
 	public void insert(BuildingDTO buildingDTO);
 	public void delete(Long id);
 	public void assignmentBuilding(AssignmentBuildingInput assignmentBuildingInput);
-	public void assignmentBuildingEdit(AssignmentBuildingInput assignmentBuildingInput, Long[] newStaff);
 }

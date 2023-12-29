@@ -30,7 +30,4 @@ public class BuildingController {
 	public void assignmentBuilding(AssignmentBuildingInput assignmentBuildingInput) {
 		buildingService.assignmentBuilding(assignmentBuildingInput);
 	}
-	public void assignmentBuildingEdit(AssignmentBuildingInput assignmentBuildingInput, Long[] newStaff) {
-		buildingService.assignmentBuildingEdit(assignmentBuildingInput, newStaff);
-	}
 }
