@@ -40,9 +40,9 @@ public class BuildingRepositoryImp extends SimpleRepository<BuildingEntity> impl
 			if ((Integer)buildingSearchInput.get("rentAreaFrom") != null && (Integer)buildingSearchInput.get("rentAreaTo") != null) {
 				condition.append(" and r.value between " + (Integer)buildingSearchInput.get("rentAreaFrom") + " and " + (Integer)buildingSearchInput.get("rentAreaTo") + "");
 			} else if ((Integer)buildingSearchInput.get("rentAreaTo") != null) {
-				condition.append(" and r.value >= " + (Integer)buildingSearchInput.get("rentAreaTo") + "");
+				condition.append(" and r.value <= " + (Integer)buildingSearchInput.get("rentAreaTo") + "");
 			} else if ((Integer)buildingSearchInput.get("rentAreaFrom") != null) {
-				condition.append(" and r.value <= " + (Integer)buildingSearchInput.get("rentAreaFrom") + "");
+				condition.append(" and r.value >= " + (Integer)buildingSearchInput.get("rentAreaFrom") + "");
 			}
 		}
 		if ((Integer)buildingSearchInput.get("rentPriceFrom") != null | (Integer)buildingSearchInput.get("rentPriceTo") != null) {
