@@ -11,8 +11,8 @@ import com.javacore.service.imp.BuildingServiceImp;
 
 public class BuildingController {
 	private BuildingService buildingService = new BuildingServiceImp();
-	public List<BuildingOutput> findBuilding(Map<String, Object> buildingSearchInput) {
-	    List<BuildingOutput> results =	buildingService.findBuilding(buildingSearchInput);
+	public List<BuildingOutput> findBuilding(Map<String, Object> buildingSearchInput, List<String> type) {
+	    List<BuildingOutput> results =	buildingService.findBuilding(buildingSearchInput, type);
 		return results;
 	}
 	public List<BuildingOutput> findAll(){

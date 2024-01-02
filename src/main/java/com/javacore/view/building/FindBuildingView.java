@@ -1,5 +1,6 @@
 package com.javacore.view.building;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +25,9 @@ public class FindBuildingView {
 		String managerName = null;
 		String managerPhone = null;
 		Long staff = null;
-		String[] type = {"noi-that"};
+		List<String> type = new ArrayList<>();
+//		type.add("tang-tret");
+//		type.add("nguyen-can");
 		Map<String, Object> buildingSearchInput = new HashMap<>();
 		buildingSearchInput.put("name", name);
 		buildingSearchInput.put("floorArea",floorArea);
@@ -41,9 +44,8 @@ public class FindBuildingView {
 		buildingSearchInput.put("mangerName",managerName);
 		buildingSearchInput.put("managerPhone",managerPhone);
 		buildingSearchInput.put("staff",staff);
-		buildingSearchInput.put("type",type);
 		BuildingController buildingController = new BuildingController();
-		List<BuildingOutput> buildings = buildingController.findBuilding(buildingSearchInput);
+		List<BuildingOutput> buildings = buildingController.findBuilding(buildingSearchInput, type);
 		for (BuildingOutput building : buildings) {
 			System.out.println("Name: " + building.getName());
 			System.out.println("Address : " + building.getAddress());

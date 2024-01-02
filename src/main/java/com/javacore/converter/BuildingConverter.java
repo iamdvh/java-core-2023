@@ -1,6 +1,7 @@
 package com.javacore.converter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.javacore.model.dto.BuildingDTO;
@@ -46,7 +47,8 @@ public class BuildingConverter {
 		BuildingOutput buildingOutput = new BuildingOutput();
 		buildingOutput.setName(buildingEntity.getName());
 		buildingOutput.setFloorArea(buildingEntity.getFloorArea());
-		buildingOutput.setAddress(buildingEntity.getStreet()+" - " + buildingEntity.getWard() + " - " +districtName);
+		List<String> preAddress = Arrays.asList(buildingEntity.getStreet(), buildingEntity.getWard(), districtName);
+		buildingOutput.setAddress(String.join(" - ", preAddress));
 		buildingOutput.setManagerName(buildingEntity.getManagerName());
 		buildingOutput.setManagerPhone(buildingEntity.getManagerPhone());
 		buildingOutput.setRenArea(rentAreaValues);

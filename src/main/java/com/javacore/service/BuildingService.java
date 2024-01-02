@@ -8,7 +8,7 @@ import com.javacore.model.input.AssignmentBuildingInput;
 import com.javacore.model.output.BuildingOutput;
 
 public interface BuildingService {
-	public List<BuildingOutput> findBuilding(Map<String, Object> buildingSearchInput);
+	public List<BuildingOutput> findBuilding(Map<String, Object> buildingSearchInput, List<String> type);
 	public List<BuildingOutput> findAll();
 	public BuildingDTO findById(Long id);
 	public void insert(BuildingDTO buildingDTO);

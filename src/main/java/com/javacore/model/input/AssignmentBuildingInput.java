@@ -2,24 +2,18 @@ package com.javacore.model.input;
 
 public class AssignmentBuildingInput {
 	private Long buildingId;
-	private Long[] staffToAdd;
-	private Long[] staffToDelete;
+	private Long[] assignStaff;
+
 	public Long getBuildingId() {
 		return buildingId;
 	}
 	public void setBuildingId(Long buildingId) {
 		this.buildingId = buildingId;
 	}
-	public Long[] getStaffToAdd() {
-		return staffToAdd;
+	public Long[] getAssignStaff() {
+		return assignStaff;
 	}
-	public void setStaffToAdd(Long[] staffToAdd) {
-		this.staffToAdd = staffToAdd;
-	}
-	public Long[] getStaffToDelete() {
-		return staffToDelete;
-	}
-	public void setStaffToDelete(Long[] staffToDelete) {
-		this.staffToDelete = staffToDelete;
+	public void setAssignStaff(Long[] assignStaff) {
+		this.assignStaff = assignStaff;
 	}
 }

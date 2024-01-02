@@ -1,5 +1,6 @@
 package com.javacore.repository.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import com.javacore.utils.StringUtils;
 public class BuildingRepositoryImp extends SimpleRepository<BuildingEntity> implements BuildingRepository {
 
 	@Override
-	public List<BuildingEntity> findBuilding(Map<String, Object> params, List<String> types) {
+	public List<BuildingEntity> findBuilding(Map<String, Object> params, List<String> type) {
 
 		StringBuilder joinQuery = new StringBuilder();
 		StringBuilder whereQuery = new StringBuilder();
@@ -19,7 +20,7 @@ public class BuildingRepositoryImp extends SimpleRepository<BuildingEntity> impl
 				"select  b.id, b.name, b.districtid, b.street, b.ward, b.numberofbasement, b.floorarea,"
 						+ "b.rentprice, b.managername, b.managerphone");
 		finalQuery.append("\nfrom building b");
-		buildSpecialQuery(params, types, joinQuery, whereQuery);
+		buildSpecialQuery(params, type, joinQuery, whereQuery);
 		buildNormalQuery(params, whereQuery);
 
 		finalQuery.append(joinQuery).append("\n" + SystemConstant.ONE_EQUAL_ONE).append(whereQuery)
@@ -29,7 +30,7 @@ public class BuildingRepositoryImp extends SimpleRepository<BuildingEntity> impl
 		return findByCondition(finalQuery.toString());
 	}
 
-	private void buildSpecialQuery(Map<String, Object> params, List<String> types, StringBuilder joinQuery,
+	private void buildSpecialQuery(Map<String, Object> params, List<String> type, StringBuilder joinQuery,
 			StringBuilder whereQuery) {
 		String districtCode = (String) params.get("districtCode");
 		Integer rentAreaFrom = (Integer) params.get("rentAreaFrom");
@@ -51,11 +52,15 @@ public class BuildingRepositoryImp extends SimpleRepository<BuildingEntity> impl
 				whereQuery.append("\nand r.value >= " + rentAreaFrom + "");
 			}
 		}
-		if (types.size() > 0) {
+		if (type.size() > 0) {
 			joinQuery.append(
 					"\njoin buildingrenttype t on t.buildingid = b.id join renttype rt on t.renttypeid = rt.id ");
-			String type = String.join(",", types);
-			whereQuery.append("\nand rt.code in(" + type + ")");
+			List<String> preType = new ArrayList<String>();
+			for (String str : type) {
+				preType.add("'"+str+"'");
+			}
+			String types = String.join(",", preType);
+			whereQuery.append("\nand rt.code in(" + types+ ")");
 		}
 		if (staff != null) {
 			joinQuery.append("\njoin assignmentbuilding a on a.buildingid = b.id ");
